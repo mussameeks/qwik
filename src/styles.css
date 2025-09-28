@@ -43,6 +43,11 @@ a{color:inherit;text-decoration:none}
   justify-content:center;
   min-height:64px;
   gap:12px
+  padding:0 16px;         /* ➜ space ku mpande */
+}
+
+.logo{ height:28px; width:auto; cursor:pointer; }
+
 }
 .logo{height:28px;width:auto}
 .header-spacer{height:8px}

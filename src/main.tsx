@@ -8,24 +8,22 @@ import MatchDetailsPage from './ui/MatchDetailsPage'
 import LoginPage from './ui/LoginPage'
 import AuthCallback from './ui/AuthCallback'
 import FullscreenChatPage from './ui/FullscreenChatPage'
+import ErrorBoundary from './ui/ErrorBoundary' // <— ADD THIS
 
 const router = createBrowserRouter([
-  {
-    path: '/',
-    element: <RootLayout />,
-    children: [
-      { index: true, element: <HomePage /> },
-      { path: 'match/:matchId', element: <MatchDetailsPage /> },
-      { path: 'login', element: <LoginPage /> },
-      { path: 'auth/callback', element: <AuthCallback /> },
-      { path: 'match/:matchId/chat', element: <FullscreenChatPage /> },
-
-    ],
-  },
+  { path: '/', element: <RootLayout />, children: [
+    { index: true, element: <HomePage /> },
+    { path: '/match/:matchId', element: <MatchDetailsPage /> },
+    { path: '/login', element: <LoginPage /> },
+    { path: '/auth/callback', element: <AuthCallback /> },
+    { path: '/chat/:fixtureId', element: <FullscreenChatPage /> },
+  ]},
 ])
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
-  </React.StrictMode>
+    <ErrorBoundary>
+      <RouterProvider router={router} />
+    </ErrorBoundary>
+  </React.StrictMode>,
 )

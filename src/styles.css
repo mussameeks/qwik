@@ -1,0 +1,407 @@
+:root{
+  --bg: #0f1115;
+  --panel: #161923;
+  --muted: #7a8192;
+  --text: #e9edf5;
+  --accent: #4aa8ff;
+  --line: #242a38;
+  --tint: #1b2130;          /* subtle header tint */
+  --tint2: #0f141f;         /* body background of section */
+   --ok: #22c55e;      /* green for FT */
+  --danger: #ef4444;  /* red for LIVE */
+}
+*{box-sizing:border-box}
+html,body,#root{height:100%}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, Apple Color Emoji, Segoe UI Emoji;
+}
+a{color:inherit;text-decoration:none}
+
+/* Content container */
+.container{
+  max-width:690px;
+  margin:0 auto;
+  padding:0 16px;
+}
+
+/* Header */
+.header{
+  position:sticky;
+  top:0;
+  background:linear-gradient(180deg, rgba(15,17,21,0.92), rgba(15,17,21,0.7));
+  backdrop-filter: blur(8px);
+  z-index:50;
+  border-bottom:1px solid var(--line)
+}
+.header-row{
+  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  min-height:64px;
+  gap:12px
+}
+.logo{height:28px;width:auto}
+.header-spacer{height:8px}
+
+/* Date filter */
+.datebar{
+  overflow-x:auto;
+  overflow-y:hidden;
+  -ms-overflow-style:none;   /* IE/Edge */
+  scrollbar-width:none;      /* Firefox */
+  border-bottom:1px solid var(--line);
+  padding:10px 0;
+  background:var(--bg);
+  -webkit-overflow-scrolling: touch;
+}
+.datebar::-webkit-scrollbar{height:0} /* Chrome/Safari/Opera */
+.date-scroller{display:flex;gap:8px;min-width:max-content;padding-bottom:2px}
+.date-scroller::-webkit-scrollbar{height:0}
+/* Date pills – visible on dark background with clear active state */
+.date-pill{
+  padding:10px 12px;border:1px solid var(--line);border-radius:10px;cursor:pointer;white-space:nowrap;background:var(--panel);color:var(--text);
+}
+.date-pill:hover{border-color:var(--accent);}
+.date-pill[aria-selected="true"]{background:var(--text);color:#000;border-color:var(--text);}
+/* Breadcrumbs */
+.breadcrumb { margin: 6px 0 10px; }
+.breadcrumb ol { list-style:none; padding:0; margin:0; display:flex; flex-wrap:wrap; gap:6px; align-items:center; }
+.crumb { display:flex; align-items:center; gap:6px; font-size:13px; color:var(--muted); }
+.crumb a { padding:4px 6px; border:1px solid var(--line); border-radius:8px; background:var(--panel); }
+.crumb a:hover { border-color: var(--accent); color: var(--text); }
+.crumb span[aria-current="page"] { padding:4px 6px; border:1px dashed var(--line); border-radius:8px; color: var(--text); }
+.crumb-sep { color: var(--muted); }
+
+/* ===== Country section card (inspired by screenshot) ===== */
+.section{
+  border:1px solid var(--line);
+  border-radius:12px;
+  margin:12px 0;
+  overflow:hidden;
+  background:var(--tint2);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.18);
+}
+.section.is-open{ box-shadow: 0 6px 18px rgba(0,0,0,0.24); }
+
+/* Section header bar */
+.section-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  padding:10px 12px;
+  cursor:pointer;
+  background: linear-gradient(0deg, color-mix(in srgb, var(--tint) 92%, transparent), var(--tint));
+  border-bottom:1px solid var(--line);
+}
+.head-left{display:flex; align-items:center; gap:10px;}
+.flag{width:20px;height:14px;object-fit:cover;border-radius:3px;border:1px solid #0002}
+.country-name{font-weight:700; letter-spacing:.2px;}
+
+.head-right{display:flex; align-items:center; gap:10px;}
+.head-action{
+  font-size:12px;
+  color:var(--muted);
+  border:1px solid var(--line);
+  padding:4px 8px;
+  border-radius:999px;
+  background:var(--panel);
+}
+.head-action:hover{ color:var(--text); border-color:var(--accent); }
+.chev{ transition: transform .2s ease; color:var(--muted); }
+.section.is-open .chev{ transform: rotate(180deg); }
+
+/* Section body (matches list) */
+.section-body{
+  padding:8px 8px 10px;
+}
+/* Match row inside group */
+.match-item{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:12px 10px;
+  border:1px solid var(--line);
+  border-radius:10px;
+  margin:8px 4px;
+  background: var(--panel);
+  cursor:pointer;
+}
+.match-item:hover{ border-color: var(--accent); }
+
+.match-left{display:flex; gap:10px; align-items:center;}
+.badge{
+  font-size:12px;
+  border:1px solid var(--line);
+  padding:2px 6px;
+  border-radius:999px;
+  color:var(--muted);
+  background: var(--tint2);
+}
+.teams{font-weight:600}
+
+.match-right{display:flex; align-items:center; gap:10px;}
+.status{font-size:12px; color:var(--muted)}
+.time{min-width:72px;text-align:right;color:var(--muted);font-variant-numeric: tabular-nums;}
+
+/* Tabs */
+.tabbar{display:flex;gap:8px;border-bottom:1px solid var(--line);margin-bottom:12px}
+.tab{
+  padding:10px 14px;
+  border:1px solid var(--line);
+  border-bottom:none;
+  border-radius:10px 10px 0 0;
+  cursor:pointer;
+  background:var(--panel);
+  color:var(--muted);
+  font-weight:600
+}
+.tab:hover{color:var(--text)}
+.tab[aria-selected="true"]{
+  background:var(--bg);
+  border-color:var(--accent);
+  color:var(--text);
+  filter: drop-shadow(0 2px 8px rgba(0,0,0,0.2));
+}
+
+/* Details content */
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.stat{border:1px solid var(--line);padding:10px;border-radius:10px;background:var(--panel)}
+.kv{display:flex;justify-content:space-between}
+.small{font-size:12px;color:var(--muted)}
+
+@media (max-width:700px){
+  .grid{grid-template-columns:1fr}
+}
+/* Chat styles */
+.chat-wrap{display:flex;flex-direction:column;gap:8px}
+.chat-header{display:flex;justify-content:space-between;align-items:center}
+.chat-view{height:360px;overflow:auto;border:1px solid var(--line);border-radius:10px;background:var(--tint2);padding:10px;scroll-behavior:smooth}
+.chat-msg{margin-bottom:8px;max-width:80%}
+.chat-msg.me{margin-left:auto}
+.chat-msg .meta{font-size:12px;color:var(--muted);display:flex;gap:8px;align-items:center;margin:0 6px}
+.chat-msg .bubble{background:var(--panel);border:1px solid var(--line);padding:8px 10px;border-radius:10px}
+.chat-msg.me .bubble{background:var(--accent);color:#000;border-color:var(--accent)}
+.chat-input{display:flex;gap:8px}
+.chat-input input{flex:1;padding:10px;border:1px solid var(--line);border-radius:10px;background:var(--panel);color:var(--text)}
+.chat-input button{padding:10px 14px;border:1px solid var(--accent);border-radius:10px;background:transparent;color:var(--text);cursor:pointer}
+.chat-input button:disabled{opacity:0.5;cursor:not-allowed}
+
+/* Layout scaffold for sticky footer */
+.app{min-height:100vh;display:flex;flex-direction:column}
+.main{flex:1}
+
+/* Footer */
+.footer{
+  border-top:1px solid var(--line);
+  background:var(--tint);
+  color:var(--muted);
+}
+.footer-nav{
+  display:flex;
+  gap:16px;
+  justify-content:center;
+  align-items:center;
+  padding:14px 0;
+  flex-wrap:wrap;          /* so it wraps nicely on small screens */
+}
+.footer-link{
+  text-decoration:none;
+  color:var(--muted);
+  font-size:14px;
+}
+.footer-link:hover{color:var(--text)}
+/* Score banner with status colors */ 
+}
+.score-line{
+  display:flex;
+  gap:12px;
+  justify-content:center;
+  align-items:baseline;
+  margin:8px 0 14px;
+}
+.score{
+  font-size:28px;
+  font-weight:700;
+}
+.score-live .score{ color: var(--danger); }
+.score-final .score{ color: var(--ok); }
+.badge{
+  font-size:12px;
+  border:1px solid var(--line);
+  border-radius:999px;
+  padding:2px 8px;
+  background:var(--panel);
+  color:var(--muted);
+}
+.badge.live{ border-color: var(--danger); color: var(--danger); }
+.badge.ft{   border-color: var(--ok);     color: var(--ok); }
+/* Score coloring inside DetailsTab */
+.score-wrap{display:flex;align-items:center;gap:8px}
+.score-val{font-weight:700}
+.score-live{color:var(--danger)}
+.score-final{color:var(--ok)}
+.min-badge{
+  font-size:12px;
+  border:1px solid var(--danger);
+  color:var(--danger);
+  background:color-mix(in srgb, var(--danger) 10%, transparent);
+  padding:2px 6px;border-radius:999px;
+}
+
+/* Home list: status badges & live highlight */
+.match-row{display:flex;justify-content:space-between;align-items:center;padding:10px;border:1px solid var(--line);border-radius:10px;background:var(--panel)}
+.match-row + .match-row{margin-top:8px}
+.match-row.is-live{outline:1px solid color-mix(in srgb, var(--danger) 50%, transparent)}
+
+.badge{font-size:12px;border:1px solid var(--line);border-radius:999px;padding:2px 8px;background:var(--tint);color:var(--muted);margin-right:8px}
+.badge.live{border-color:var(--danger);color:var(--danger);background:color-mix(in srgb, var(--danger) 10%, transparent)}
+.badge.ft{border-color:var(--ok);color:var(--ok);background:color-mix(in srgb, var(--ok) 10%, transparent)}
+.linklike{background:none;border:none;color:var(--accent);cursor:pointer;padding:0}
+input{padding:10px;border:1px solid var(--line);border-radius:10px;background:var(--panel);color:var(--text)}
+/* Presence + reactions + slow mode polish */
+.presence{display:flex;align-items:center;gap:6px}
+.presence .dot{width:6px;height:6px;border-radius:50%;background:var(--accent)}
+.presence .typing{opacity:.8}
+
+.bubble{position:relative}
+.reactions{display:flex;gap:6px;margin-top:6px}
+.react{display:inline-flex;align-items:center;gap:4px;border:1px solid var(--line);background:var(--tint);border-radius:999px;padding:2px 6px;font-size:13px;cursor:pointer}
+.react em{font-style:normal;opacity:.8}
+.react.active{border-color:var(--accent)}
+.react:hover{border-color:var(--accent)}
+
+.chat-input input[disabled]{opacity:.7; cursor:not-allowed}
+/* === Mobile-friendly chat tweaks === */
+
+/* Make the chat panel adapt to small screens */
+@media (max-width: 600px){
+  .chat-wrap{ gap: 10px }
+
+  /* Compact header row */
+  .chat-header{ gap: 8px; }
+  .presence{ gap: 6px; flex-wrap: wrap; }
+  .presence .small{ font-size: 12px; }
+
+  /* Make the scroller taller on phones and use dynamic viewport to handle mobile browsers */
+  .chat-view{
+    height: min(60dvh, 520px);
+    /* improve touch scrolling */
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Sticky input bar: stays visible above the keyboard */
+  .chat-input{
+    position: sticky;
+    bottom: 0;
+    padding-bottom: max(8px, env(safe-area-inset-bottom));
+    background: color-mix(in srgb, var(--bg) 85%, transparent);
+    backdrop-filter: blur(6px);
+    border-top: 1px solid var(--line);
+  }
+
+  /* Bigger tap targets */
+  .chat-input input{
+    font-size: 16px;        /* prevents iOS zoom on focus */
+    padding: 12px;
+  }
+  .chat-input button{
+    padding: 12px 16px;
+  }
+
+  /* Message layout: keep it readable and compact */
+  .chat-msg .meta{
+    gap: 6px;
+    font-size: 12px;
+  }
+  .chat-msg .bubble{
+    font-size: 15px;
+    line-height: 1.35;
+    padding: 10px 12px;
+  }
+
+  /* Reactions: wrap and enlarge hit area */
+  .reactions{ flex-wrap: wrap; gap: 8px; }
+  .react{
+    padding: 4px 8px;
+    font-size: 14px;
+  }
+}
+
+/* Ultra-small phones */
+@media (max-width: 360px){
+  .presence .typing{ display:none; } /* hide typing list on very small widths */
+}
+
+/* Optional: full-width container for chat on narrow screens (keeps other pages as-is) */
+@media (max-width: 600px){
+  .chat-wrap .container, .chat-wrap.container{
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+}
+
+/* iOS safe areas even on larger screens (when in standalone/PWA) */
+.chat-input{
+  padding-bottom: max(8px, env(safe-area-inset-bottom));
+}
+/* === Fullscreen Chat (mobile-first) === */
+.chat-fullscreen{
+  position: fixed;
+  inset: 0;
+  background: var(--bg);
+  display: flex;
+  flex-direction: column;
+  z-index: 9999; /* above header/datebar */
+}
+
+.chat-full-header{
+  height: 48px;
+  display:flex; align-items:center; justify-content:space-between;
+  padding: 0 6px;
+  border-bottom: 1px solid var(--line);
+  background: var(--bg);
+  position: sticky; top: 0;
+}
+.back-btn{
+  width:36px; height:36px; border:1px solid var(--line);
+  border-radius:10px; background:var(--panel); color:var(--text);
+  display:flex; align-items:center; justify-content:center; cursor:pointer;
+}
+.chat-title{ font-weight:700 }
+
+.chat-full-main{
+  flex:1; min-height:0; /* allow child scrollers */
+  padding: 8px 10px 0;
+}
+
+/* Make ChatTab breathe nicely in fullscreen */
+.chat-full-main .chat-view{
+  height: calc(100dvh - 48px - 90px); /* header + input space */
+}
+.chat-full-main .chat-input{
+  position: sticky;
+  bottom: 0;
+  padding-bottom: max(8px, env(safe-area-inset-bottom));
+  background: var(--bg);
+  border-top: 1px solid var(--line);
+}
+
+/* Show the small CTA only on narrow screens */
+.mobile-chat-cta{ display:none; margin: 4px 0 8px }
+@media (max-width: 720px){
+  .mobile-chat-cta{ display:block }
+}
+
+/* Optional: hide global footer in fullscreen (if it's inside the DOM root) */
+.chat-fullscreen ~ .footer{ display:none }
+
+/* Make tap targets comfy on phones */
+@media (max-width: 600px){
+  .chat-full-main .chat-input input{ font-size:16px; padding:12px }
+  .chat-full-main .chat-input button{ padding:12px 16px }
+}

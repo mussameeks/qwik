@@ -9,6 +9,10 @@ import LoginPage from './ui/LoginPage'
 import AuthCallback from './ui/AuthCallback'
 import FullscreenChatPage from './ui/FullscreenChatPage'
 import ErrorBoundary from './ui/ErrorBoundary' // <— ADD THIS
+// add these imports near the top
+import TermsPage from './ui/legal/TermsPage'
+import PrivacyPage from './ui/legal/PrivacyPage'
+import CookiesPage from './ui/legal/CookiesPage'
 
 const router = createBrowserRouter([
   { path: '/', element: <RootLayout />, children: [
@@ -17,6 +21,11 @@ const router = createBrowserRouter([
     { path: '/login', element: <LoginPage /> },
     { path: '/auth/callback', element: <AuthCallback /> },
     { path: '/chat/:fixtureId', element: <FullscreenChatPage /> },
+     // inside createBrowserRouter([...]) under children: [ ... ],
+    { path: '/terms', element: <TermsPage /> },
+    { path: '/privacy', element: <PrivacyPage /> },
+    { path: '/cookies', element: <CookiesPage /> },
+
   ]},
 ])
 

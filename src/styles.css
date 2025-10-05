@@ -404,6 +404,12 @@ input{padding:10px;border:1px solid var(--line);border-radius:10px;background:va
   .chat-full-main .chat-input input{ font-size:16px; padding:12px }
   .chat-full-main .chat-input button{ padding:12px 16px }
 }
+@keyframes qwkPulse {
+  0%   { box-shadow: 0 0 0 0 rgba(239,68,68,.7); }
+  70%  { box-shadow: 0 0 0 8px rgba(239,68,68,0); }
+  100% { box-shadow: 0 0 0 0 rgba(239,68,68,0); }
+}
+
 
 
 
